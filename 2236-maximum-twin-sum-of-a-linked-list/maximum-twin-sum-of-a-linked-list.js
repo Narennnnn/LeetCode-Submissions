@@ -10,21 +10,17 @@
  * @return {number}
  */
 const pairSum = (head) => {
-  const values = [];
+  const stack = [];
+  let ans = Number.MIN_SAFE_INTEGER;
   let current = head;
 
   while (current) {
-    values.push(current.val);
+    stack.push(current.val);
     current = current.next;
   }
-
-  const n = values.length;
-  let ans = Number.MIN_SAFE_INTEGER;
-
-  for (let i = 0, j = n - i - 1; i <= Math.floor(n / 2) - 1; i++, j--) {
-    ans = Math.max(ans, values[i] + values[j]);
-    console.log(ans);
-  }
+  for(let i = 0; i <stack.length; i++) {
+      ans = Math.max(ans, stack[i] + stack[stack.length -i- 1]);
+    }
 
   return ans;
-};
+}
