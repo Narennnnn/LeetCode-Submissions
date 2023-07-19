@@ -17,7 +17,7 @@ int eraseOverlapIntervals(vector<vector<int>>& intervals) {
 
         if (start >= prevEnd) {
             // No overlap, add the interval to the result
-            result.push_back(interval);
+           // result.push_back(interval);
             prevEnd = end;
         } else {
             // Overlapping interval, increment count
