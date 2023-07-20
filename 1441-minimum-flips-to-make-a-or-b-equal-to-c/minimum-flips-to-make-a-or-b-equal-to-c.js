@@ -1,36 +1,17 @@
 var minFlips = function(a, b, c) {
-    const padLeadingZeroes = (num, length) => {
-        const binary = num.toString(2);
-        return '0'.repeat(length - binary.length) + binary;
-    };
+    let count = 0;
+    for (let i = 0; i < 31; i++) { // Running for 32 bits (0 to 31)
+        const x = !!(a & (1 << i)); // Check whether i-th bit is set in 'a'
+        const y = !!(b & (1 << i)); // Check whether i-th bit is set in 'b'
+        const z = !!(c & (1 << i)); // Check whether i-th bit is set in 'c'
 
-    const maxLen = Math.max(a.toString(2).length, b.toString(2).length, c.toString(2).length);
-    const newA = padLeadingZeroes(a, maxLen);
-    const newB = padLeadingZeroes(b, maxLen);
-    const newC = padLeadingZeroes(c, maxLen);
-
-    var mini = 0;
-
-    for (let i = newC.length - 1; i >= 0; i--) {
-        const bitC = newC.charAt(i);
-        const bitA = newA.charAt(i);
-        const bitB = newB.charAt(i);
-
-        if (bitC == '0') {
-            if (bitA == '0' && bitB == '0') continue;
-            if (bitA == '0' && bitB == '1') mini++;
-            if (bitA == '1' && bitB == '0') mini++;
-            if (bitA == '1' && bitB == '1') {
-                mini += 2;
-                console.log("check");
-            }
-        } else if (bitC == '1') {
-            if (bitA == '1' && bitB == '1') continue;
-            if ((bitA == '0' && bitB == '1') || (bitA == '1' && bitB == '0')) continue;
-            if (bitA == '0' && bitB == '0') mini++;
-        } else continue;
+        if (!z) {
+            if (x && y) count += 2;
+            else if (x || y) count++;
+        } else {
+            if (!x && !y) count++;
+        }
     }
-    return mini;
+    return count;
 };
-
 
