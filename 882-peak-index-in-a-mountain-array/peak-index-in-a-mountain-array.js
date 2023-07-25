@@ -3,18 +3,16 @@
  * @return {number}
  */
 var peakIndexInMountainArray = function(arr) {
-  let left = 0;
-  let right = arr.length - 1;
-
-  while (left < right) {
-    const mid = Math.floor((left + right) / 2);
-
-    if (arr[mid] < arr[mid + 1]) {
-      left = mid + 1;
-    } else {
-      right = mid;
-    }
-  }
-
-  return left;
+     var ind = 0;
+        var maxi = 0;
+        for (var i = 1; i < arr.length - 1; i++) {
+            var prev = arr[i - 1];
+            var next = arr[i + 1];
+            var curr = arr[i];
+            if (curr > prev && curr > next) {
+                maxi = Math.max(maxi, curr);
+                ind = i;
+            }
+        }
+        return ind;
 };
