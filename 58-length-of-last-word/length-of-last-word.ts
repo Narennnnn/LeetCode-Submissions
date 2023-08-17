@@ -10,6 +10,6 @@ function lengthOfLastWord(s: string): number {
         }
     }
     
-    console.log("Trimmed String:", newStr); // Print the trimmed string
+    console.log("Trimmed String:", newStr);
     return ctr;
 }
