@@ -1,28 +1,17 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        vector<int> list;
-        
-        while (head != nullptr) {
-            list.push_back(head->val);
-            head = head->next;
-        }
-        
-        ListNode* newHead = nullptr;
+        ListNode* prev = nullptr;
         ListNode* current = nullptr;
-        
-        for (int i = list.size() - 1; i >= 0; i--) {
-            ListNode* newNode = new ListNode(list[i]);
-            
-            if (newHead == nullptr) {
-                newHead = newNode;
-                current = newNode;
-            } else {
-                current->next = newNode;
-                current = current->next;
-            }
+        ListNode* nextNode = head;
+
+        while (nextNode != nullptr) {
+            current = nextNode;
+            nextNode = nextNode->next;
+            current->next = prev;
+            prev = current;
         }
-        
-        return newHead;
+
+        return prev; // 'prev' now points to the new head
     }
 };
