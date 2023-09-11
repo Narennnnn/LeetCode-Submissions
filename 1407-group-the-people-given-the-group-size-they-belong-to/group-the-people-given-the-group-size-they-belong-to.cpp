@@ -1,7 +1,3 @@
-#include <iostream>
-#include <unordered_map>
-#include <vector>
-
 class Solution {
 public:
     vector<vector<int>> groupThePeople(vector<int>& groupSizes) {
@@ -9,9 +5,8 @@ public:
         vector<vector<int>> result;
         for (int i = 0; i < groupSizes.size(); ++i) {
             groups[groupSizes[i]].push_back(i);
-            cout << "Added index " << i << " to group size " << groupSizes[i] << endl;
+            cout << "index " << i << " added to group size " << groupSizes[i] << endl;
         }
-
         for (const auto entry : groups) {
             int groupSize = entry.first;
             const vector<int> indices = entry.second;
