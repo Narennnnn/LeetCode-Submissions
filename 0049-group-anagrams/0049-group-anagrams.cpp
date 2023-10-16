@@ -1,30 +1,18 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string, vector<string>> m;
-        for (int i = 0; i < strs.size(); i++) {
-            string key = getKey(strs[i]);
-            m[key].push_back(strs[i]);
+        unordered_map<string, vector<string>> mp;
+        
+        for(auto x: strs){
+            string word = x;
+            sort(word.begin(), word.end());
+            mp[word].push_back(x);
         }
         
-        vector<vector<string>> result;
-        for (auto it = m.begin(); it != m.end(); it++) {
-            result.push_back(it->second);
+        vector<vector<string>> ans;
+        for(auto x: mp){
+            ans.push_back(x.second);
         }
-        return result;
-    }
-private:
-    string getKey(string str) {
-        vector<int> count(26);
-        for (int j = 0; j < str.size(); j++) {
-            count[str[j] - 'a']++;
-        }
-        
-        string key = "";
-        for (int i = 0; i < count.size(); i++) {
-            key.append(to_string(count[i]) + '#');
-        }
-        cout<<key<<endl;
-        return key;
+        return ans;
     }
 };
