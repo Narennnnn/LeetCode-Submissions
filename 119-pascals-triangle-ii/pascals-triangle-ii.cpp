@@ -1,16 +1,11 @@
 class Solution {
 public:
     vector<int> getRow(int rowIndex) {
-        vector<vector<int>> pascalTri;
-        for (int i = 0; i <=rowIndex; i++) {
-            vector<int> innerRow(i + 1, 1);
-            for (int j = 1; j < i; j++) {
-                innerRow[j] = pascalTri[i-1][j-1] + pascalTri[i-1][j];
-            }
-            pascalTri.push_back(innerRow);
-            if(i==rowIndex)
-             return innerRow;  
+        vector<int> resArr(rowIndex + 1, 1);
+        for(int k = 1; k <= rowIndex; k++) {
+            long long nextVal = (long long)(resArr[k - 1]) * (rowIndex - k + 1) / k;
+            resArr[k] = nextVal;
         }
-        return {-1,-1};//will never execute actually
+        return resArr;
     }
 };
