@@ -1,25 +1,19 @@
-static const auto fast=[](){ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);return nullptr;}();
 class Solution {
-public:
-    void findAll(int index, vector<int>temp,vector<vector<int>>&res,vector<int>& nums,int n)
-    {
-        if(index==n)
-        {
-            res.push_back(temp);
-            return;
+private:
+    void backTrack(vector<int>& nums,vector<vector<int>>& list, vector<int>& templist, int startInd){
+        list.push_back(templist);
+        for(int i=startInd;i<nums.size();i++){
+            templist.push_back(nums[i]);
+            backTrack(nums,list,templist,i+1);
+            templist.pop_back();
         }
-        findAll(index+1,temp,res,nums,n);
-        //not picking current element and moving on
-        temp.push_back(nums[index]);
-        findAll(index+1,temp,res,nums,n);
-        //picking
-        temp.pop_back();
     }
+public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>>res;
-        vector<int>temp;
-        int n=nums.size();
-        findAll(0,temp,res,nums,n);
-        return res;
+        vector<vector<int>>list;
+        vector<int>tempList;
+        sort(nums.begin(),nums.end());
+        backTrack(nums,list,tempList,0);
+        return list;
     }
 };
