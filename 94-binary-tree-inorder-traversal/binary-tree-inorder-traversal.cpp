@@ -10,38 +10,18 @@
  * };
  */
 class Solution {
+      void inOrder(TreeNode* root,vector<int>& res){
+        if(root==nullptr)
+            return;
+        inOrder(root->left,res);
+        res.emplace_back(root->val);
+        inOrder(root->right,res);
+    }
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int>v;
-        stack<TreeNode*>stk;
-        while(root!=NULL || ! stk.empty())
-        {
-        if (root != nullptr){
-            stk.emplace(root);
-            root = root->left;
-        } else {
-            root = stk.top();
-            stk.pop();
-            v.push_back(root->val);
-            root = root->right;
-        }
-        }
-        return v;
+        vector<int>res;
+        inOrder(root,res);
+        return res;
+
     }
 };
-/*void Tree::iterativeInorder(Node *p) {
-    stack<Node*> stk;
-    while (p != nullptr || ! stk.empty())
-    {
-        if (p != nullptr){
-            stk.emplace(p);
-            p = p->lchild;
-        } else {
-            p = stk.top();
-            stk.pop();
-            cout << p->data << ", " << flush;
-            p = p->rchild;
-        }
-    }
-    cout << endl;
-}*/
